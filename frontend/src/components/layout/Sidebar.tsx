@@ -17,7 +17,7 @@ interface Props {
   stage: string;
 }
 
-export default function Sidebar({ sessionId, profile, profilePct, stageIndex, stage: _stage }: Props) {
+export default function Sidebar({ sessionId, profile, profilePct, stageIndex }: Props) {
   const router = useRouter();
   const [recent, setRecent] = useState<SessionSummary[]>([]);
 
