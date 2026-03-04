@@ -32,8 +32,6 @@ _sessions: dict[str, InterviewSession] = {}
 _voice = VoiceClient()
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
-
 async def _get_session(session_id: str) -> InterviewSession:
     """Return in-memory session, loading from MongoDB if needed."""
     if session_id in _sessions:
