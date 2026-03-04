@@ -81,6 +81,5 @@ class VoiceClient:
             # convert the generator returned by the SDK into raw bytes
             return b"".join(audio_gen)
         except Exception as exc:
-            import streamlit as st
-            st.warning(f"TTS error: {exc}")
+            print(f"TTS error: {exc}")
             return None
