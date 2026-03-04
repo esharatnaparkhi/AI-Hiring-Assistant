@@ -33,7 +33,7 @@ const REC_LABELS: Record<string, { label: string; cls: string }> = {
 };
 
 export default function ContextPanel({
-  stage, sessionId, voiceModeEnabled, onVoiceToggle,
+  stage, sessionId: _sessionId, voiceModeEnabled, onVoiceToggle,
   evaluation, improvements, isComplete,
 }: Props) {
   return (

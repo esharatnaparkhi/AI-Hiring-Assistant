@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { getSession, Profile } from "@/lib/api";
-import { useChat, ChatMessage } from "@/hooks/useChat";
+import { useChat } from "@/hooks/useChat";
 import { useVoice } from "@/hooks/useVoice";
 import Sidebar from "@/components/layout/Sidebar";
 import ContextPanel from "@/components/layout/ContextPanel";
