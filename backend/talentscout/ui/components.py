@@ -19,7 +19,7 @@ _STAGE_NAMES = ["Greeting", "Profile", "Technical", "Evaluation", "Complete"]
 def render_sidebar(session: InterviewSession) -> None:
     with st.sidebar:
         # Logo
-        st.markdown('<div class="sidebar-logo">🎯 TalentScout</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-logo">⭐️ TalentScout</div>', unsafe_allow_html=True)
         st.markdown('<div class="sidebar-tagline">AI-Powered Interview Assistant</div>', unsafe_allow_html=True)
 
         st.divider()

@@ -13,7 +13,7 @@ from fastapi.responses import StreamingResponse, Response
 from pydantic import BaseModel
 
 from talentscout.conversation import InterviewSession
-from talentscout.storage import upsert_session, get_session, list_sessions
+from talentscout.storage import upsert_session, get_session, list_sessions, delete_session
 from talentscout.voice import VoiceClient
 from talentscout.utils import new_session_id
 
@@ -97,6 +97,15 @@ async def list_recent_sessions(limit: int = 20):
 async def get_session_state(session_id: str):
     session = await _get_session(session_id)
     return _snapshot(session)
+
+
+@app.delete("/api/sessions/{session_id}")
+async def delete_session_route(session_id: str):
+    deleted = await delete_session(session_id)
+    _sessions.pop(session_id, None)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return {"deleted": True}
 
 
 # ── Chat (SSE streaming) ──────────────────────────────────────────────────────

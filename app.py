@@ -21,7 +21,7 @@ from talentscout.ui.components import (
 # ── Page config (must be first Streamlit call) ────────────────────────────────
 st.set_page_config(
     page_title="TalentScout AI",
-    page_icon="🎯",
+    page_icon="⭐️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -50,7 +50,7 @@ if not session.history:
 render_sidebar(session)
 
 # ── Main area ─────────────────────────────────────────────────────────────────
-st.markdown('<div class="page-title">🎯 TalentScout AI Interview</div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">⭐️ TalentScout AI Interview</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="page-subtitle">Your AI-powered hiring assistant — say <b>done</b> when you\'re finished.</div>',
     unsafe_allow_html=True,

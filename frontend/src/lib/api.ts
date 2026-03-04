@@ -66,6 +66,11 @@ export async function getSession(sessionId: string): Promise<SessionState> {
   return res.json();
 }
 
+export async function deleteSession(sessionId: string): Promise<boolean> {
+  const res = await fetch(`${API}/api/sessions/${sessionId}`, { method: "DELETE" });
+  return res.ok;
+}
+
 export async function getEvaluation(sessionId: string): Promise<Evaluation> {
   const res = await fetch(`${API}/api/sessions/${sessionId}/evaluation`);
   if (!res.ok) throw new Error("Evaluation not found");

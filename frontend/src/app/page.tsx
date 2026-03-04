@@ -9,7 +9,7 @@ export default function HomePage() {
         style={{ borderBottom: "1px solid var(--border)", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(12px)" }}
       >
         <div className="flex items-center gap-2">
-          <span style={{ fontSize: "1.4rem" }}>🎯</span>
+          <span style={{ fontSize: "1.4rem" }}>⭐️</span>
           <span className="font-bold" style={{ fontSize: "1.1rem", color: "var(--text-primary)" }}>
             TalentScout
           </span>
@@ -21,7 +21,7 @@ export default function HomePage() {
           </span>
         </div>
         <p style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>
-          Powered by OpenAI + ElevenLabs
+          Powered by TalentScout AI
         </p>
       </header>
 

@@ -135,7 +135,7 @@ export default function InterviewPage() {
             {isComplete ? "Interview Complete ✅" : `Interview · ${stage}`}
           </h1>
           <p style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-            GPT-4o mini + ElevenLabs
+            TalentScout AI
           </p>
         </div>
 

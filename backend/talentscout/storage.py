@@ -42,3 +42,10 @@ async def list_sessions(limit: int = 20) -> list[dict[str, Any]]:
     col = _get_collection()
     cursor = col.find({}, {"_id": 0}).sort("stored_at", -1).limit(limit)
     return await cursor.to_list(length=limit)
+
+
+async def delete_session(session_id: str) -> bool:
+    """Delete a session document. Returns True if a document was deleted."""
+    col = _get_collection()
+    result = await col.delete_one({"session_id": session_id})
+    return result.deleted_count > 0

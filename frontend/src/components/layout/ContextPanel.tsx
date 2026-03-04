@@ -55,8 +55,8 @@ export default function ContextPanel({
             Model
           </span>
         </div>
-        <p className="font-semibold text-sm" style={{ color: "var(--text-primary)" }}>GPT-4o mini</p>
-        <p style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: 2 }}>OpenAI · Chat + Streaming</p>
+        {/* <p className="font-semibold text-sm" style={{ color: "var(--text-primary)" }}>TalentScout AI</p> */}
+        <p style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: 2 }}>AI-Powered Interview Assistant</p>
       </div>
 
       {/* Stage info */}
@@ -73,9 +73,9 @@ export default function ContextPanel({
         >
           {stage}
         </span>
-        <p style={{ fontSize: "0.72rem", color: "var(--text-faint)", marginTop: 8 }}>
+        {/* <p style={{ fontSize: "0.72rem", color: "var(--text-faint)", marginTop: 8 }}>
           Session <span className="font-mono">{sessionId.slice(0, 8)}…</span>
-        </p>
+        </p> */}
       </div>
 
       {/* Voice toggle */}
@@ -84,7 +84,7 @@ export default function ContextPanel({
           <div>
             <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Voice Mode</p>
             <p style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
-              {voiceModeEnabled ? "ElevenLabs active" : "Click to enable"}
+              {voiceModeEnabled ? "Voice mode active" : "Click to enable"}
             </p>
           </div>
           <button

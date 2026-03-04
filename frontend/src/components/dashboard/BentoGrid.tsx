@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Mic, MessageSquare, Clock, BarChart2, ArrowRight, Sparkles } from "lucide-react";
-import { createSession, listSessions, SessionSummary } from "@/lib/api";
+import { Mic, MessageSquare, Clock, BarChart2, ArrowRight, Sparkles, Trash2 } from "lucide-react";
+import { createSession, listSessions, deleteSession, SessionSummary } from "@/lib/api";
 import { useEffect, useState } from "react";
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };
@@ -94,7 +94,7 @@ export default function BentoGrid() {
         </div>
         <p className="font-semibold" style={{ color: "var(--text-primary)" }}>Voice Mode</p>
         <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-          Speak naturally — ElevenLabs STT transcribes your answers and the AI responds with voice.
+          Speak naturally — TalentScout AI transcribes your answers and responds with voice.
         </p>
       </motion.div>
 
@@ -133,24 +133,40 @@ export default function BentoGrid() {
         ) : (
           <div className="flex flex-col gap-2">
             {sessions.slice(0, 5).map((s) => (
-              <button
+              <div
                 key={s.session_id}
-                onClick={() => router.push(`/interview/${s.session_id}`)}
-                className="flex items-center justify-between w-full text-left rounded-xl px-3 py-2 transition-colors"
+                className="flex items-center rounded-xl px-3 py-2 transition-colors group"
                 style={{ background: "var(--bg)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "var(--card-lavender)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "var(--bg)")}
               >
-                <div>
-                  <p className="font-medium text-sm" style={{ color: "var(--text-primary)" }}>
-                    {s.name}
-                  </p>
-                  <p style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
-                    {s.stage} · {s.stored_at ? new Date(s.stored_at * 1000).toLocaleDateString() : "—"}
-                  </p>
-                </div>
-                <MessageSquare size={14} style={{ color: "var(--text-faint)" }} />
-              </button>
+                <button
+                  onClick={() => router.push(`/interview/${s.session_id}`)}
+                  className="flex-1 text-left flex items-center justify-between"
+                >
+                  <div>
+                    <p className="font-medium text-sm" style={{ color: "var(--text-primary)" }}>
+                      {s.name}
+                    </p>
+                    <p style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
+                      {s.stage} · {s.stored_at ? new Date(s.stored_at * 1000).toLocaleDateString() : "—"}
+                    </p>
+                  </div>
+                  <MessageSquare size={14} style={{ color: "var(--text-faint)" }} />
+                </button>
+                <button
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    await deleteSession(s.session_id);
+                    setSessions((prev) => prev.filter((x) => x.session_id !== s.session_id));
+                  }}
+                  className="opacity-0 group-hover:opacity-100 ml-2 flex-shrink-0 transition-opacity"
+                  style={{ color: "var(--text-faint)", background: "none", border: "none", cursor: "pointer", padding: 4, borderRadius: 6 }}
+                  title="Delete session"
+                >
+                  <Trash2 size={13} />
+                </button>
+              </div>
             ))}
           </div>
         )}

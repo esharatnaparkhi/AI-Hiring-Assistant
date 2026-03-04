@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Home, Clock } from "lucide-react";
+import { Home, Clock, Trash2 } from "lucide-react";
 import { Profile, SessionSummary } from "@/lib/api";
 import { useEffect, useState } from "react";
-import { listSessions } from "@/lib/api";
+import { listSessions, deleteSession } from "@/lib/api";
 
 const STAGE_STEPS = ["Greeting", "Profile", "Technical", "Evaluation", "Complete"];
 
@@ -22,7 +22,7 @@ export default function Sidebar({ sessionId, profile, profilePct, stageIndex, st
   const [recent, setRecent] = useState<SessionSummary[]>([]);
 
   useEffect(() => {
-    listSessions(10).then(setRecent).catch(() => {});
+    listSessions(10).then(setRecent).catch(() => { });
   }, []);
 
   return (
@@ -41,7 +41,7 @@ export default function Sidebar({ sessionId, profile, profilePct, stageIndex, st
       {/* Logo */}
       <div>
         <Link href="/" className="flex items-center gap-2" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: "1.3rem" }}>🎯</span>
+          <span style={{ fontSize: "1.3rem" }}>⭐️</span>
           <span className="font-bold" style={{ fontSize: "1rem", color: "var(--text-primary)" }}>
             TalentScout
           </span>
@@ -173,19 +173,35 @@ export default function Sidebar({ sessionId, profile, profilePct, stageIndex, st
               <Clock size={11} /> Recent
             </p>
             {recent.filter(r => r.session_id !== sessionId).slice(0, 4).map((r) => (
-              <button
+              <div
                 key={r.session_id}
-                onClick={() => router.push(`/interview/${r.session_id}`)}
-                className="w-full text-left rounded-xl px-2 py-1.5 mb-1 transition-colors"
+                className="flex items-center gap-1 rounded-xl mb-1 group"
                 style={{ background: "transparent" }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
               >
-                <p style={{ fontSize: "0.78rem", fontWeight: 500, color: "var(--text-secondary)" }}>
-                  {r.name}
-                </p>
-                <p style={{ fontSize: "0.68rem", color: "var(--text-faint)" }}>{r.stage}</p>
-              </button>
+                <button
+                  onClick={() => router.push(`/interview/${r.session_id}`)}
+                  className="flex-1 text-left px-2 py-1.5"
+                >
+                  <p style={{ fontSize: "0.78rem", fontWeight: 500, color: "var(--text-secondary)" }}>
+                    {r.name}
+                  </p>
+                  <p style={{ fontSize: "0.68rem", color: "var(--text-faint)" }}>{r.stage}</p>
+                </button>
+                <button
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    await deleteSession(r.session_id);
+                    setRecent((prev) => prev.filter((s) => s.session_id !== r.session_id));
+                  }}
+                  className="opacity-0 group-hover:opacity-100 flex-shrink-0 mr-2 transition-opacity"
+                  style={{ color: "var(--text-faint)", background: "none", border: "none", cursor: "pointer", padding: 4, borderRadius: 6 }}
+                  title="Delete session"
+                >
+                  <Trash2 size={12} />
+                </button>
+              </div>
             ))}
           </div>
         </>
