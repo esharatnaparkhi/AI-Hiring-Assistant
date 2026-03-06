@@ -1,4 +1,5 @@
 # TalentScout — AI Hiring Assistant
+https://ai-hiring-assistant-snowy.vercel.app
 
 TalentScout is an AI-powered interview platform that conducts structured job interviews autonomously. It collects candidate profiles through natural conversation, asks tailored technical questions, and delivers a complete evaluation report — all in real time.
 
