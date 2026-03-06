@@ -106,7 +106,3 @@ Start Interview
 The interview ends automatically when the candidate says `done`, `exit`, `quit`, `bye`, or `stop`.
 
 ---
-
-## Project Structure
-
-See [ProjectSummary.md](./ProjectSummary.md) for a full technical breakdown of the architecture, streaming implementation, state machine, voice pipeline, and MongoDB schema.
